@@ -28,6 +28,6 @@ services:
         - MONGO_URL=mongodb://admin:qwerty@mongodb:27017/notesDB
         - DB_NAME=notesDB
         - SESSION_SECRET=supersecret
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm install && npm vfstart"
     depends_on:
         - mongodb
