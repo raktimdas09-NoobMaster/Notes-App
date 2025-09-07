@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes App - Login / Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Notes App</h1>
+
+    <form id="registerForm" class="form">
+        <h2>Register</h2>
+        <input name="username" placeholder="Username" required />
+        <input name="password" type="password" placeholder="Password" required />
+        <button type="submit">📝 Register</button>
+    </form>
+
+    <form id="loginForm" class="form">
+        <h2>Login</h2>
+        <input name="username" placeholder="Username" required />
+        <input name="password" type="password" placeholder="Password" required />
+        <button type="submit">🔑 Login</button>
+    </form>
+
+    <div class="footer">released_by@Raktim_V0.1</div>
+</div>
+
+<script>
+    const registerForm = document.getElementById("registerForm");
+    const loginForm = document.getElementById("loginForm");
+
+    registerForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const res = await fetch("/register", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                username: e.target.username.value,
+                password: e.target.password.value
+            })
+        });
+        alert(await res.text());
+    };
+
+    loginForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const res = await fetch("/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                username: e.target.username.value,
+                password: e.target.password.value
+            })
+        });
+        alert(await res.text());
+        if (res.ok) window.location.href = "/notes.html";
+    };
+</script>
+</body>
+</html>

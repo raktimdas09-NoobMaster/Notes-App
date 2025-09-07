@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Notes - Notes App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="tab-header">Your Notes</div>
+
+    <form id="noteForm">
+        <input name="content" placeholder="Write a note..." required />
+        <button type="submit">Add Note</button>
+    </form>
+
+    <ul id="notesList"></ul>
+
+    <button id="logoutBtn">Logout</button>
+</div>
+
+<script>
+    async function fetchNotes() {
+        const res = await fetch("/notes");
+        if (res.ok) {
+            const notes = await res.json();
+            const ul = document.getElementById("notesList");
+            ul.innerHTML = "";
+            notes.forEach(note => {
+                const li = document.createElement("li");
+                li.textContent = note.content + " (" + new Date(note.createdAt).toLocaleString() + ")";
+                ul.appendChild(li);
+            });
+        } else if (res.status === 401) {
+            window.location.href = "/";
+        }
+    }
+
+    document.getElementById("noteForm").onsubmit = async (e) => {
+        e.preventDefault();
+        const res = await fetch("/notes", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ content: e.target.content.value })
+        });
+        if (res.ok) {
+            e.target.content.value = "";
+            fetchNotes();
+        }
+    };
+
+    document.getElementById("logoutBtn").onclick = async () => {
+        await fetch("/logout");
+        window.location.href = "/";
+    };
+
+    fetchNotes();
+</script>
+</body>
+</html>
