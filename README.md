@@ -5,7 +5,7 @@ Option 1: Directly from Dockerfile
 
 docker build -t my-app:1.0 .  #create a image(my-app:1.0) from dockerfile
 
-docker run -d -p Host_Port:5050 --name notes-app my-app:latest  
+docker run -d -p Host_Port:5050 --name notes-app my-app:1.0 
 
 #run a container(notes-app) from docker image(my-app:1.0)
 
