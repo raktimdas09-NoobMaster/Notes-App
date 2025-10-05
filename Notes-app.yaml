@@ -1,11 +1,10 @@
-version: "3.9"
-
 services:
   notes-app:
     build:
-      context: .          # Current folder containing Dockerfile
-      dockerfile: Dockerfile  # Name of your Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    image: notes-app:latest       # <-- explicitly set image name
     container_name: notes-app
     ports:
-      - "5500:5050"       # Map host port 5500 → container port 5050
+      - "5500:5050"
     restart: unless-stopped
