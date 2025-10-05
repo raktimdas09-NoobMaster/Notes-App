@@ -6,7 +6,7 @@ services:
     container_name: notes-app
     working_dir: /app
     ports:
-      - "5050:5050"
+      - "5500:5050"
     volumes:
       - ./App:/app
     command: ["node", "server.js"]
