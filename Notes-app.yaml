@@ -2,15 +2,10 @@ version: "3.9"
 
 services:
   notes-app:
-    image: node:18-alpine
+    build:
+      context: .          # Current folder containing Dockerfile
+      dockerfile: Dockerfile  # Name of your Dockerfile
     container_name: notes-app
-    working_dir: /app
     ports:
-      - "5500:5050"
-    volumes:
-      - ./App:/app
-    command: ["node", "server.js"]
-    environment:
-      NODE_ENV: development
-    # Optional: if you want dependencies installed at runtime
-    # entrypoint: sh -c "npm install && node server.js"
+      - "5500:5050"       # Map host port 5500 → container port 5050
+    restart: unless-stopped
