@@ -8,3 +8,10 @@ docker run -d -p Host_Port:5050 --name notes-app my-app:1.0  #run a container(no
 Option 2: From DockerComposeFile(Notes-app.Yaml) using Dockerfile context
 docker compose -f Notes-app.yaml  up -d  #crate image and container using dockerfile context
 
+
+How to run the Only the dependencies(Mongodb+Express)
+
+Using DockerComposeFile(notes.Yaml)
+docker compose -f notes.yaml up -d  #create both container by running both images through yaml file
+
+
